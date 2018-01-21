@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ppms/ppms.iml" filepath="$PROJECT_DIR$/ppms/ppms.iml" />
-      <module fileurl="file://$PROJECT_DIR$/rassign.iml" filepath="$PROJECT_DIR$/rassign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/rassign.iml" filepath="$PROJECT_DIR$/.idea/rassign.iml" />
     </modules>
   </component>
 </project>
