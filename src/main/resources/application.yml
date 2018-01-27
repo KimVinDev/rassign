@@ -1,0 +1,5 @@
+messageUtils:
+  sysErrorCode: SE000001
+  messagesMap:
+    SE000001: 系统异常[SE000001]
+    CE000001: 业务异常[CE000001]

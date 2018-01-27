@@ -1,7 +1,5 @@
 package com.kvin.ppms.service.dto.common;
 
-import com.kvin.ppms.exception.PpmsException;
-
 public class PpmsExceptionDto {
     /**
      * 异常码
@@ -13,10 +11,10 @@ public class PpmsExceptionDto {
      */
     private String message;
 
-    public PpmsExceptionDto(PpmsException e) {
-        code = e.getCode();
-        message = e.getMessage();
-    }
+    /**
+     * 异常原因
+     */
+    private Throwable cause;
 
     public String getCode() {
         return code;
@@ -32,5 +30,13 @@ public class PpmsExceptionDto {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Throwable getCause() {
+        return cause;
+    }
+
+    public void setCause(Throwable cause) {
+        this.cause = cause;
     }
 }

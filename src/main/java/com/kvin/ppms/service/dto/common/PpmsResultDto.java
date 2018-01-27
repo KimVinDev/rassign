@@ -1,7 +1,6 @@
 package com.kvin.ppms.service.dto.common;
 
 import com.kvin.ppms.common.kbn.ResultType;
-import com.kvin.ppms.exception.PpmsException;
 
 /**
  * PPMS通用返回值
@@ -45,24 +44,24 @@ public class PpmsResultDto<T> {
      *     data;null
      * </pre>
      *
-     * @param ppmsException 异常信息
+     * @param ppmsExceptionDto 异常信息
      */
-    public PpmsResultDto(PpmsException ppmsException) {
+    public PpmsResultDto(PpmsExceptionDto ppmsExceptionDto) {
         resultType = ResultType.ERROR;
-        ppmsExceptionDto = new PpmsExceptionDto(ppmsException);
+        this.ppmsExceptionDto = ppmsExceptionDto;
     }
 
     /**
      * 生成指定结果
      *
-     * @param resultType    结果
-     * @param data          数据
-     * @param ppmsException 异常信息
+     * @param resultType       结果
+     * @param data             数据
+     * @param ppmsExceptionDto 异常信息
      */
-    public PpmsResultDto(ResultType resultType, PpmsException ppmsException, T data) {
+    public PpmsResultDto(ResultType resultType, PpmsExceptionDto ppmsExceptionDto, T data) {
         this.resultType = resultType;
         this.data = data;
-        ppmsExceptionDto = new PpmsExceptionDto(ppmsException);
+        this.ppmsExceptionDto = ppmsExceptionDto;
     }
 
     public ResultType getResultType() {
@@ -72,7 +71,6 @@ public class PpmsResultDto<T> {
     public void setResultType(ResultType resultType) {
         this.resultType = resultType;
     }
-
 
     public PpmsExceptionDto getPpmsExceptionDto() {
         return ppmsExceptionDto;

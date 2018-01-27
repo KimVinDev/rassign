@@ -1,7 +1,10 @@
 package com.kvin.ppms.handler.common;
 
 import com.kvin.ppms.exception.PpmsException;
+import com.kvin.ppms.service.dto.common.PpmsExceptionDto;
 import com.kvin.ppms.service.dto.common.PpmsResultDto;
+import com.kvin.ppms.utils.MessageUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -13,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice
 public class GlobalPpmsExceptionHandler {
 
+    @Autowired
+    MessageUtils messageUtils;
+
     /**
      * 项目异常处理
      *
@@ -23,7 +29,11 @@ public class GlobalPpmsExceptionHandler {
      */
     @ExceptionHandler(value = PpmsException.class)
     public PpmsResultDto<String> ppmsErrorHandler(HttpServletRequest req, PpmsException e) throws Exception {
-        PpmsResultDto<String> resultDto = new PpmsResultDto<>(e);
+        PpmsExceptionDto exceptionDto = new PpmsExceptionDto();
+        PpmsResultDto resultDto = new PpmsResultDto(exceptionDto);
+        exceptionDto.setCode(e.getCode());
+        exceptionDto.setMessage(messageUtils.getMsgByCode(e.getCode()));
+        exceptionDto.setCause(e.getCause());
         return resultDto;
     }
 
@@ -37,8 +47,11 @@ public class GlobalPpmsExceptionHandler {
      */
     @ExceptionHandler(value = Exception.class)
     public PpmsResultDto<String> unknownErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-        PpmsException ppmsException = new PpmsException(e);
-        PpmsResultDto<String> resultDto = new PpmsResultDto<>(ppmsException);
+        PpmsExceptionDto exceptionDto = new PpmsExceptionDto();
+        exceptionDto.setCode(messageUtils.getSysErrorCode());
+        exceptionDto.setMessage(messageUtils.getSysErrorMessage());
+        exceptionDto.setCause(e.getCause());
+        PpmsResultDto<String> resultDto = new PpmsResultDto<>(exceptionDto);
         return resultDto;
     }
 }

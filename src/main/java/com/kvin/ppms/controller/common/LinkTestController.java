@@ -25,7 +25,7 @@ public class LinkTestController {
     @RequestMapping("/error")
     @GetMapping
     public PpmsResultDto testError() {
-        throw new PpmsException();
+        throw new PpmsException("CE000001");
     }
 
     /**
